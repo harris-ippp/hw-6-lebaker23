@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#Worked with Elayne Stecher on this hw
+
 import requests
 import pandas as pd
 import matplotlib as plt
@@ -12,12 +15,15 @@ for line in open('ELECTION_ID.txt'):
         df = pd.read_csv(file_name,index_col=0,thousands=",",skiprows=[1])
         df.rename(inplace=True,columns=header.iloc[0].to_dict())
         df.dropna(inplace=True,axis=1)
+        #Only care about first 4 counties
         df = df.loc[['Accomack County','Albemarle County',
                      'Alexandria City','Alleghany County'],
                     ['Democratic','Republican','Total Votes Cast']]
+        #Making Republican Share quotient
         df['Republican Share'] = df['Republican']/df['Total Votes Cast']
         df["Year"] = years
         df_list.append(df)
+#Putting it all together
 df = pd.concat(df_list)
 df = df.reset_index()
 
