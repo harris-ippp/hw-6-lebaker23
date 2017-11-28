@@ -4,11 +4,11 @@
 from bs4 import BeautifulSoup as bs
 import requests
 
-resp = requests.get("URL")
+resp = requests.get("http://historical.elections.virginia.gov/elections/search/year_from:1924/year_to:2016/office_id:1/stage:General")
 soup = bs(resp.content, "html.parser")
 
 #Only want nested objects under election item class
-x = soup.find_all("tr",{"class":"election_item})
+x = soup.find_all("tr",{"class":"election_item"})
 
 #Get contents of each id tag, makea list of contents
 ids = []
